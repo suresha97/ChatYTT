@@ -4,8 +4,8 @@ from datetime import datetime, timedelta
 
 from dotenv import load_dotenv
 
-from youtube_data.playlist_data_loader import PlaylistDataLoader
-from utils.s3 import save_json_to_s3
+from chatytt.youtube_data.playlist_data_loader import PlaylistDataLoader
+from chatytt.utils.s3 import save_json_to_s3
 
 
 if __name__ == "__main__":

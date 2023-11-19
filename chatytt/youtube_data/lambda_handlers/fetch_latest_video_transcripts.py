@@ -3,9 +3,9 @@ import os
 
 from dotenv import load_dotenv
 
-from youtube_data.transcript_fetcher import TranscriptFetcher
-from youtube_data.data_models import FormattedVideoTranscript
-from utils.s3 import (
+from chatytt.youtube_data.transcript_fetcher import TranscriptFetcher
+from chatytt.youtube_data.data_models import FormattedVideoTranscript
+from chatytt.utils.s3 import (
     list_keys_at_prefix_dir_level,
     load_json_from_s3_as_dict,
     save_json_to_s3,
