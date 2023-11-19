@@ -15,5 +15,5 @@ def read_data_from_json_file(file_path: str) -> dict:
 
 
 def write_data_to_txt_file(data: Any, file_name: str):
-    with open(file_name, 'w') as file:
+    with open(file_name, "w") as file:
         file.write(data)

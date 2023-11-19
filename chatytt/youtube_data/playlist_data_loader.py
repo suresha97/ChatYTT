@@ -1,5 +1,6 @@
 import os
 from typing import List, Dict
+from datetime import datetime
 
 from youtube_api.youtube_api import YoutubeDataApi
 
@@ -11,9 +12,18 @@ class PlaylistDataLoader:
     def __init__(self):
         self.youtube_data_api = YoutubeDataApi(key=self.try_get_api_key())
 
-    # TODO
-    def get_recent_video_ids_from_playlist(self, start_date, end_date):
-        raise NotImplementedError
+    def get_recent_video_ids_from_playlist(
+        self, playlist_id: str, lookback_datetime: datetime
+    ):
+        lookback_timestamp = datetime.timestamp(lookback_datetime)
+        playlist_videos = self.get_video_metadata_from_playlist(playlist_id)
+        recent_videos = [
+            video
+            for video in playlist_videos
+            if video.publish_date > lookback_timestamp
+        ]
+
+        return parse_video_ids(recent_videos)
 
     def get_video_ids_from_playlist(self, playlist_id: str) -> Dict[str, List[str]]:
         video_metadata = self.get_video_metadata_from_playlist(playlist_id)

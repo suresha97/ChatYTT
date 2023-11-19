@@ -22,7 +22,10 @@ def load_json_from_s3_as_dict(bucket: str, key: str) -> Dict[Any, Any]:
 def list_keys_at_prefix_dir_level(bucket: str, filter_prefix_dir: str) -> List[str]:
     s3 = boto3.resource("s3")
     bucket_obj = s3.Bucket(bucket)
-    filtered_bucket_obj = bucket_obj.objects.filter(Prefix=f"{filter_prefix_dir}/")
-    keys = [f.key.split("/")[1] for f in filtered_bucket_obj][1:]
+    filtered_bucket_obj = bucket_obj.objects.filter(Prefix=f"{filter_prefix_dir}")
+    keys = [
+        obj.key.replace(filter_prefix_dir, "").split("/")[0]
+        for obj in filtered_bucket_obj
+    ]
 
-    return keys
+    return list(filter(None, keys))
