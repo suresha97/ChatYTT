@@ -1,0 +1,52 @@
+import os
+
+from dotenv import load_dotenv
+
+from chatytt.utils.s3 import list_keys_at_prefix_dir_level
+from chatytt.embeddings.s3_json_document_loader import S3JsonFileLoader
+from chatytt.embeddings import pre_processing
+from chatytt.embeddings.pinecone_db import PineconeDB
+
+
+def get_latest_transcript_file_keys():
+    transcript_keys = list_keys_at_prefix_dir_level(
+        bucket=str(os.environ.get("YOUTUBE_DATA_BUCKET")),
+        filter_prefix_dir=f"{os.environ.get('VIDEO_TRANSCRIPTS_KEY_PREFIX')}/"
+        f"{os.environ.get('PLAYLIST_NAME')}-transcripts/",
+    )
+    max_timestamp_key = max([int(timestamp_key) for timestamp_key in transcript_keys])
+
+    file_filter_prefix = (
+        f"{os.environ.get('VIDEO_TRANSCRIPTS_KEY_PREFIX')}/"
+        + f"{os.environ.get('PLAYLIST_NAME')}-transcripts/"
+        + f"{max_timestamp_key}/"
+    )
+
+    latest_transcript_files = list_keys_at_prefix_dir_level(
+        bucket=str(os.environ.get("YOUTUBE_DATA_BUCKET")),
+        filter_prefix_dir=file_filter_prefix,
+    )
+
+    return [file_filter_prefix + file for file in latest_transcript_files]
+
+
+if __name__ == "__main__":
+    load_dotenv()
+
+    latest_transcript_file_keys = get_latest_transcript_file_keys()
+
+    docs = []
+    for file_key in latest_transcript_file_keys:
+        loader = S3JsonFileLoader(
+            bucket=os.environ.get("YOUTUBE_DATA_BUCKET"),
+            key=file_key,
+            text_splitter=pre_processing.get_recursive_character_splitter(),
+        )
+
+        docs.extend(loader.load(split_doc=True))
+
+    vector_store = PineconeDB(
+        index_name=str(os.environ.get("PINECONE_INDEX_NAME")),
+        embedding_source="open-ai",
+    )
+    vector_store.save_documents_as_embeddings(docs)
