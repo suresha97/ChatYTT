@@ -1,0 +1,17 @@
+youtube_data:
+  video:
+    playlist_id: PL22egh3ok4cOaKRqIt6LwBRXcyiVcS5k2
+    latest_video_lookback_delta_days: 14
+  transcript:
+    formatting_method: text
+
+embeddings:
+  pre_processing:
+    recursive_character_splitting:
+      chunk_size: 2000
+      chunk_overlap: 10
+
+pinecone_db:
+  index_name: youtube-transcripts
+  environment: gcp-starter
+  embedding_source: open-ai

@@ -10,6 +10,7 @@ from chatytt.utils.s3 import (
     load_json_from_s3_as_dict,
     save_json_to_s3,
 )
+from chatytt.conf.config import load_config
 
 
 def get_most_recent_video_id_collection_timestamp():
@@ -40,6 +41,8 @@ def store_latest_transcripts(
 if __name__ == "__main__":
     load_dotenv()
 
+    transcript_conf = load_config()["youtube_data"]["transcript"]
+
     max_timestamp_key = get_most_recent_video_id_collection_timestamp()
     latest_video_ids = load_json_from_s3_as_dict(
         bucket=str(os.environ.get("YOUTUBE_DATA_BUCKET")),
@@ -49,7 +52,9 @@ if __name__ == "__main__":
         f"/video_ids.json",
     )["video_ids"]
 
-    transcript_fetcher = TranscriptFetcher(formatting_method="text")
+    transcript_fetcher = TranscriptFetcher(
+        formatting_method=transcript_conf["formatting_method"]
+    )
     transcripts = transcript_fetcher.get_batch_formatted_video_transcripts(
         latest_video_ids
     )

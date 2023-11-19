@@ -6,6 +6,7 @@ from chatytt.utils.s3 import list_keys_at_prefix_dir_level
 from chatytt.embeddings.s3_json_document_loader import S3JsonFileLoader
 from chatytt.embeddings import pre_processing
 from chatytt.embeddings.pinecone_db import PineconeDB
+from chatytt.conf.config import load_config
 
 
 def get_latest_transcript_file_keys():
@@ -32,6 +33,7 @@ def get_latest_transcript_file_keys():
 
 if __name__ == "__main__":
     load_dotenv()
+    pinecone_conf = load_config()["pinecone_db"]
 
     latest_transcript_file_keys = get_latest_transcript_file_keys()
 
@@ -46,7 +48,7 @@ if __name__ == "__main__":
         docs.extend(loader.load(split_doc=True))
 
     vector_store = PineconeDB(
-        index_name=str(os.environ.get("PINECONE_INDEX_NAME")),
-        embedding_source="open-ai",
+        index_name=pinecone_conf["index_name"],
+        embedding_source=pinecone_conf["embedding_source"],
     )
     vector_store.save_documents_as_embeddings(docs)
