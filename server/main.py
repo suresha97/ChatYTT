@@ -1,8 +1,8 @@
 from flask import Flask, request
 from dotenv import load_dotenv
 
-from chains.standard.qa_chain import QAChain
-from vector_store.pinecone_db import PineconeDB
+from chatytt.chains.standard.qa_chain import QAChain
+from chatytt.vector_store.pinecone_db import PineconeDB
 
 load_dotenv()
 
