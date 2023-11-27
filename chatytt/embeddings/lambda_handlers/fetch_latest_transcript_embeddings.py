@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 from chatytt.utils.s3 import list_keys_at_prefix_dir_level
 from chatytt.embeddings.s3_json_document_loader import S3JsonFileLoader
 from chatytt.embeddings import pre_processing
-from chatytt.embeddings.pinecone_db import PineconeDB
+from vector_store.pinecone_db import PineconeDB
 from chatytt.conf.config import load_config
 
 

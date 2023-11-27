@@ -29,6 +29,11 @@ class PineconeDB:
     def get_index(self, num_pool_threads: int = 4):
         return pinecone.Index(self.index_name, pool_threads=num_pool_threads)
 
+    def get_similar_docs(self, query: str, top_k: int = 3):
+        similar_docs = self.vector_store.similarity_search(query=query, k=top_k)
+
+        return similar_docs
+
 
 def get_embeddings_from_source(source: str) -> Embeddings:
     embedding_source_map = {"open-ai": OpenAIEmbeddings()}
