@@ -14,6 +14,16 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
+button:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+button:active {
+    background-color: rgba(255, 255, 255, 0.01);
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+
 #app {
     min-height: 100vh;
     background-color: #343541;
@@ -31,11 +41,67 @@ body {
     /*background: linear-gradient(111.9deg, rgb(221, 49, 49) 0.3%, rgb(0, 8, 119) 100.7%);*/
 }
 
+#logo {
+    height: 40px;
+    width: 100%;
+    /*margin: 10px;*/
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#img-chatgpt {
+    height: 30px;
+    width: 30px;
+    /*padding: 10px;*/
+    float: right;
+    margin: 0.5rem;
+}
+
+#img-youtube {
+    height: 30px;
+    width: 30px;
+    margin: 0.5rem;
+    float: left;
+}
+
+#logo-text {
+    /*padding: 10px;*/
+    font-size: 1rem;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+
+.new-chat-button {
+    display: flex;
+    align-items: center;
+    background: transparent;
+    padding: 4px;
+    width: 20rem;
+    margin: 2rem;
+    border-radius: 0.5rem;
+    border: 2px solid rgb(100, 100, 100);
+    font-size: 10px;
+    cursor: pointer;
+    float: left;
+    left: 20px;
+}
+
+.add-icon-img {
+    height: 12px;
+    width: 12px;
+    margin: 1rem;
+    float: left;
+}
+
+
 .chat-history-button {
     display: flex;
     align-items: center;
     background: transparent;
-    padding: 1.5rem;
+    padding: 3px;
     width: 20rem;
     margin: 1rem auto;
     border-radius: 0.5rem;
@@ -44,50 +110,11 @@ body {
     cursor: pointer;
 }
 
-#logo {
-    height: 50px;
-    width: 70%;
-    margin: 10px;
-}
-
-#logo-text {
-    padding: 10px;
-    font-size: 1rem;
-}
-
-#img-chatgpt {
-    height: 30px;
-    width: 30px;
-    /*padding: 10px;*/
-    margin: 5px;
-}
-
-#img-youtube {
-    height: 30px;
-    width: 30px;
-    /*padding: 10px;*/
-    margin: 5px;
-}
-
-#new-chat-button {
-    border: solid 0.5px rgba(255, 255, 255 ,0.5);
-    font-size: 10px;
-    background-color:  transparent;
-    border-radius: 5px;
-    padding: 7px;
-    margin: 10px;
-    cursor: pointer;
-}
-
-
-button:hover {
-    background-color: rgba(255, 255, 255, 0.01);
-}
-
-button:active {
-    background-color: rgba(255, 255, 255, 0.01);
-    box-shadow: 0 5px #666;
-    transform: translateY(4px);
+.chat-history-img {
+    height: 12px;
+    width: 12px;
+    margin: 1rem;
+    float: left;
 }
 
 #chat-history {
@@ -124,35 +151,56 @@ button:active {
     text-align: justify;
 }
 
-
-::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-    background: rgba(90, 90, 90);
-}
-
-::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.2);
-}
-
-.bot-chat-item {
-    background: rgba(255, 255, 255, 0.1);
-    width: fit-content;
-    padding: 5px;
-    border-radius: 0.5rem;
-    margin-right: 4em;
-}
-
-/*.user-chat-item {*/
-/*    background: rgba(0, 0, 0, 0.2);*/
+/*.bot-chat-item {*/
+/*    background: rgba(255, 255, 255, 0.1);*/
 /*    width: fit-content;*/
-/*    padding: 1px;*/
+/*    padding: 5px;*/
 /*    border-radius: 0.5rem;*/
 /*    margin-right: 4em;*/
 /*}*/
+
+.bot-chat-item {
+    background: rgba(255, 255, 255, 0.1);;
+    width: fit-content;
+    border-radius: 0.5rem;
+    margin: 1rem;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: flex-start;
+    text-align: justify;
+}
+
+.user-chat-item {
+    /*background: rgba(255, 255, 255, 0.1);;*/
+    width: fit-content;
+    border-radius: 0.5rem;
+    margin: 1rem;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: flex-start;
+    text-align: justify;
+}
+
+
+.bot-chat-img {
+    object-fit: cover;
+    height: 25px;
+    width: 25px;
+    /*padding: 0.001rem 1rem;*/
+    margin-right: 1rem;
+    margin-top: 1rem;
+    border-radius: 0.5rem;
+}
+
+
+.user-chat-img {
+    object-fit: cover;
+    height: 30px;
+    width: 30px;
+    margin-right: 1rem;
+    border-radius: 0.5rem;
+}
+
 
 #input-message-container {
     position: relative;
@@ -179,7 +227,8 @@ button:active {
 }
 
 
-#submit-message {
+.submit-message-button {
+    border: solid 0.5px rgba(255, 255, 255 ,0.5);
     position: absolute;
     bottom: 12px;
     right: 50px;
@@ -189,20 +238,29 @@ button:active {
     background-color: rgba(255, 255, 255, 0.01);
 }
 
-#submit-message:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+.submit-message-img {
+    height: 12px;
+    width: 12px;
+    margin: 0rem;
+    float: left;
 }
-
-#submit-message:active {
-    background-color: rgba(255, 255, 255, 0.01);
-    box-shadow: 5px 5px #666;
-    transform: translateY(4px);
-}
-
 
  #copyright {
-    color: rgba(255, 255 ,255, 0.5);
+    color: rgba(255, 255 ,255, 0.4);
     font-size: 9px;
     padding: 2px;
      margin: 0px;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(90, 90, 90);
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
 }

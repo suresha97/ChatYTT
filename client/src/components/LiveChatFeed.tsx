@@ -1,4 +1,6 @@
 import {useEffect, useRef} from "react";
+import chatgpt from "../assets/chatgpt.svg"
+import userIcon from "../assets/profile.png"
 
 export type chatItem = {
     text: string
@@ -22,6 +24,7 @@ function LiveChatFeed({currentChat}: Props) {
         <div id="live-chat-feed">
             {currentChat.map((item, i) => {
                 return <div key={i} className={item.isBot?"bot-chat-item":"user-chat-item"}>
+                    <img className={item.isBot?"bot-chat-img":"user-chat-img"} src={item.isBot?chatgpt:userIcon}/>
                     <p>{item.text}</p>
                 </div>
             })}

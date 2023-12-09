@@ -1,4 +1,5 @@
 import React from "react";
+import sendBtn from "../assets/send.svg"
 
 interface Props {
     setUserInput: React.SetStateAction<any>
@@ -21,7 +22,7 @@ function UserInputContainer({setUserInput, userInput, onClickEventHandler}: Prop
     return (
         <div id="input-message-container">
             <input id="input-message" placeholder="Send Message" value={userInput} onChange={getUserInput}/>
-            <button id="submit-message" onClick={onClickEventHandler}> ➢ </button>
+            <button className="submit-message-button" onClick={onClickEventHandler}> <img className="submit-message-img" src={sendBtn} /> </button>
         </div>
     )
 }

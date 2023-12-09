@@ -26,7 +26,9 @@ function getCurrentChat({setCurrentChat, userInput, currentChat, setUserInput}: 
             'Accept': 'application/json'
         },
         body: JSON.stringify({
-            query: userInputText
+            query: userInputText,
+            chatHistory: currentChat
+
         })
     }
 

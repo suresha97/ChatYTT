@@ -1,5 +1,6 @@
 import React from "react";
 import {chatItem} from "./LiveChatFeed";
+import addIcon from "../assets/add-30.png"
 
 interface Props {
     setCurrentChat: React.SetStateAction<any>
@@ -30,9 +31,9 @@ function NewChatButton({setCurrentChat, previousChats, setPreviousChats, current
 
     return (
         <button
-            id="new-chat-button"
+            className="new-chat-button"
             onClick={() => {createNewChat()}}
-        > + New Chat
+        > <img className="add-icon-img" src={addIcon}/> New Chat
         </button>
     )
 }
