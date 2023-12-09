@@ -1,6 +1,6 @@
 import {useEffect, useRef} from "react";
 import chatgpt from "../assets/chatgpt.svg"
-import userIcon from "../assets/profile.png"
+import userIcon from "../assets/usericonwhite.jpg"
 
 export type chatItem = {
     text: string

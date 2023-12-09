@@ -15,7 +15,7 @@ body {
 }
 
 button:hover {
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: rgba(183, 10, 36, 0.23);
 }
 
 button:active {
@@ -26,7 +26,7 @@ button:active {
 
 #app {
     min-height: 100vh;
-    background-color: #343541;
+    background-color:  #191919;
     display: flex;
 }
 
@@ -87,6 +87,8 @@ button:active {
     cursor: pointer;
     float: left;
     left: 20px;
+    box-shadow: 0 4px 8px 0 #DD0525,
+                 0 6px 28px 0 #DD0525;
 }
 
 .add-icon-img {
@@ -102,7 +104,7 @@ button:active {
     align-items: center;
     background: transparent;
     padding: 3px;
-    width: 20rem;
+    width: 19rem;
     margin: 1rem auto;
     border-radius: 0.5rem;
     border: 2px solid rgb(100, 100, 100);
@@ -118,9 +120,11 @@ button:active {
 }
 
 #chat-history {
-    padding: 10px;
-    margin: 10px;
-    height: 100%
+    padding: 1px;
+    margin: 5px;
+    height: 100%;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
 }
 
 #chat-history li {
@@ -146,18 +150,10 @@ button:active {
     overflow: hidden;
     overflow-y: scroll;
     scroll-behavior: smooth;
-    width: 90%;
+    width: 95%;
     max-width: 70rem;
     text-align: justify;
 }
-
-/*.bot-chat-item {*/
-/*    background: rgba(255, 255, 255, 0.1);*/
-/*    width: fit-content;*/
-/*    padding: 5px;*/
-/*    border-radius: 0.5rem;*/
-/*    margin-right: 4em;*/
-/*}*/
 
 .bot-chat-item {
     background: rgba(255, 255, 255, 0.1);;
@@ -168,10 +164,12 @@ button:active {
     display: flex;
     align-items: flex-start;
     text-align: justify;
+    /*box-shadow:  0 4px 8px 0 #DD0525,*/
+    /*0 6px 28px 0 #DD0525;*/
 }
 
 .user-chat-item {
-    /*background: rgba(255, 255, 255, 0.1);;*/
+    background: rgba(40, 40, 40, 0.1);;
     width: fit-content;
     border-radius: 0.5rem;
     margin: 1rem;
@@ -190,6 +188,8 @@ button:active {
     margin-right: 1rem;
     margin-top: 1rem;
     border-radius: 0.5rem;
+    /*box-shadow:  0 4px 8px 0 #DD0525,*/
+    /*0 6px 28px 0 #DD0525;*/
 }
 
 
@@ -222,8 +222,8 @@ button:active {
     background-color: rgba(255, 255, 255, 0.01);
     padding : 15px 15px;
     border-radius: 5px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
-                0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 4px 8px 0 #DD0525,
+                0 6px 28px 0 #DD0525;
 }
 
 
@@ -253,14 +253,24 @@ button:active {
 }
 
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 8px;
     height: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: rgba(90, 90, 90);
+    /*background: rgba(183, 10, 36, 0.26);*/
+    background: linear-gradient(to bottom right, rgba(183, 10, 36, 0.57) 0%, #b70a24 100%);
+    border-radius: 5px;
+    /*box-shadow: 0 4px 8px 0 #DD0525,*/
+    /*         0 6px 28px 0 #DD0525;*/
+}
+
+::-webkit-scrollbar-corner {
+    border-radius: 10px;
 }
 
 ::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.2);
+    background: #191919;
+    /*box-shadow: 0 4px 8px 0 #DD0525,*/
+    /*0 6px 28px 0 #DD0525;;*/
 }
