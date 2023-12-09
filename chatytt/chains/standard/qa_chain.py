@@ -24,7 +24,7 @@ class QAChain(BaseChain):
         self.llm = OpenAI()
         self.chain = load_qa_chain(llm=self.llm, chain_type=chain_type)
 
-    def get_response(self, query: str, context: Optional[str] = None):
+    def get_response(self, query: str, context: Optional[str]):
         answer = self.chain.run(input_documents=context, question=query)
 
         return answer

@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Optional
+from typing import Any
 
 
 class BaseChain(ABC):
@@ -7,5 +7,5 @@ class BaseChain(ABC):
         pass
 
     @abstractmethod
-    def get_response(self, query: str, context: Optional[str] = None) -> str:
+    def get_response(self, query: str, context: Any) -> str:
         ...
