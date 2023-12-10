@@ -15,7 +15,7 @@ body {
 }
 
 button:hover {
-    background-color: rgba(183, 10, 36, 0.23);
+    background-color: rgba(108, 103, 103, 0.24);
 }
 
 button:active {
@@ -26,7 +26,7 @@ button:active {
 
 #app {
     min-height: 100vh;
-    background-color:  #191919;
+    background-color:  #00040D;
     display: flex;
 }
 
@@ -115,10 +115,12 @@ button:active {
 }
 
 .chat-history-img {
-    height: 12px;
-    width: 12px;
-    margin: 1rem;
+    height: 15px;
+    width: 15px;
+    margin: 1.3rem;
     float: left;
+    box-shadow: 0 4px 8px 0 #DD0525,
+    0 6px 20px 0 #DD0525;
 }
 
 #chat-history {
@@ -171,7 +173,7 @@ button:active {
 }
 
 .user-chat-item {
-    background: rgba(40, 40, 40, 0.1);;
+    background: #00040D;
     width: fit-content;
     border-radius: 0.5rem;
     margin: 1rem;
