@@ -8,6 +8,14 @@ interface Props {
 }
 
 function ChatHistory({previousChats, setCurrentChat}: Props) {
+    const getDisplayString = (text: string) => {
+        if (text.length < 33) {
+            return text
+        } else {
+            return text.slice(0, 30).concat("...")
+        }
+    }
+
     return (
         <div id="chat-history">
             {previousChats.map((chat, i) => {
@@ -15,7 +23,7 @@ function ChatHistory({previousChats, setCurrentChat}: Props) {
                 if (previousChats.length != 0) {
                     return <button key={i} className="chat-history-button" onClick={() => setCurrentChat(chat)}>
                         <img className="chat-history-img" src={messageIcon}/>
-                        {chat[1].text}
+                        {getDisplayString(chat[1].text)}
                     </button>
                 }
             })}

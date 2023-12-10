@@ -104,7 +104,7 @@ button:active {
     display: flex;
     align-items: center;
     background: transparent;
-    padding: 2rem;
+    padding: 0.5rem;
     width: 29rem;
     height: 5rem;
     margin: 2rem auto;
