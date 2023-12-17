@@ -26,15 +26,15 @@ def get_answer():
     app.logger.debug(f"Query: {query}")
     app.logger.debug(f"Raw chat history: {raw_chat_history}")
     app.logger.debug(f"Parsed chat history: {chat_history}")
-    # response = chain.get_response(query=query, context=chat_history)
+    response = chain.get_response(query=query, context=chat_history)
 
-    response = (
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent viverra, nunc et cursus iaculis, lectus"
-        " orci ornare dui, sed euismod eros massa at purus."
-    )
-    import time
-
-    time.sleep(1)
+    # response = (
+    #     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent viverra, nunc et cursus iaculis, lectus"
+    #     " orci ornare dui, sed euismod eros massa at purus."
+    # )
+    # import time
+    #
+    # time.sleep(1)
     return jsonify({"response": response})
 
 
