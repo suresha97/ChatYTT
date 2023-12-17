@@ -4,7 +4,6 @@ from typing import List
 import pinecone
 from langchain.schema import Document
 from langchain.vectorstores import Pinecone
-from langchain.schema.embeddings import Embeddings
 from langchain.embeddings.openai import OpenAIEmbeddings
 
 
@@ -35,7 +34,7 @@ class PineconeDB:
         return similar_docs
 
 
-def get_embeddings_from_source(source: str) -> Embeddings:
+def get_embeddings_from_source(source: str):
     embedding_source_map = {"open-ai": OpenAIEmbeddings()}
 
     return embedding_source_map[source]

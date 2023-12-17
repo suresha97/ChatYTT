@@ -7,7 +7,7 @@ from langchain.schema.vectorstore import VectorStore
 
 from chatytt.conf.config import load_config
 from chatytt.chains.base_chain import BaseChain
-from vector_store.pinecone_db import PineconeDB
+from chatytt.vector_store.pinecone_db import PineconeDB
 
 chain_conf = load_config()["chains"]
 

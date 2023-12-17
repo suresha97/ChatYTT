@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 from chatytt.utils.s3 import list_keys_at_prefix_dir_level
 from chatytt.embeddings.s3_json_document_loader import S3JsonFileLoader
 from chatytt.embeddings import pre_processing
-from vector_store.pinecone_db import PineconeDB
+from chatytt.vector_store.pinecone_db import PineconeDB
 from chatytt.conf.config import load_config
 
 
@@ -31,7 +31,7 @@ def get_latest_transcript_file_keys():
     return [file_filter_prefix + file for file in latest_transcript_files]
 
 
-if __name__ == "__main__":
+def lambda_handler(event, context):
     load_dotenv()
     pinecone_conf = load_config()["pinecone_db"]
 
@@ -47,8 +47,13 @@ if __name__ == "__main__":
 
         docs.extend(loader.load(split_doc=True))
 
+    docs = docs[0:2]
     vector_store = PineconeDB(
         index_name=pinecone_conf["index_name"],
         embedding_source=pinecone_conf["embedding_source"],
     )
     vector_store.save_documents_as_embeddings(docs)
+
+
+if __name__ == "__main__":
+    lambda_handler({}, None)

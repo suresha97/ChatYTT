@@ -38,7 +38,7 @@ def store_latest_transcripts(
         )
 
 
-if __name__ == "__main__":
+def lambda_handler(event, context):
     load_dotenv()
 
     transcript_conf = load_config()["youtube_data"]["transcript"]
@@ -62,3 +62,7 @@ if __name__ == "__main__":
     store_latest_transcripts(
         transcripts, video_id_retrieval_timestamp=max_timestamp_key
     )
+
+
+if __name__ == "__main__":
+    lambda_handler({}, None)

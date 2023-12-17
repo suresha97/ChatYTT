@@ -8,7 +8,8 @@ from chatytt.youtube_data.playlist_data_loader import PlaylistDataLoader
 from chatytt.utils.s3 import save_json_to_s3
 from chatytt.conf.config import load_config
 
-if __name__ == "__main__":
+
+def lambda_handler(event, context):
     load_dotenv()
 
     video_conf = load_config()["youtube_data"]["video"]
@@ -19,7 +20,7 @@ if __name__ == "__main__":
         lookback_datetime=datetime.now()
         - timedelta(days=video_conf["latest_video_lookback_delta_days"]),
     )
-
+    print(os.environ.get("YOUTUBE_DATA_API_KEY"))
     save_json_to_s3(
         video_ids,
         bucket=str(os.environ.get("YOUTUBE_DATA_BUCKET")),
@@ -28,3 +29,7 @@ if __name__ == "__main__":
         f"{int(time.time())}/"
         f"video_ids.json",
     )
+
+
+if __name__ == "__main__":
+    lambda_handler({}, None)
