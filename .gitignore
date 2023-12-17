@@ -161,3 +161,7 @@ cython_debug/
 
 # Pycharm
 .idea
+
+# AWS
+deploy/lambda_code_uri/
+.aws-sam
