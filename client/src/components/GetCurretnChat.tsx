@@ -32,7 +32,7 @@ function getCurrentChat({setCurrentChat, userInput, currentChat, setUserInput}: 
         })
     }
 
-    fetch("https://3dvunaz8l4.execute-api.eu-west-1.amazonaws.com/Prod/get-answer/", options).then(
+    fetch("https://ejrq1n5fl2.execute-api.eu-west-1.amazonaws.com/Prod/get-answer", options).then(
         (response) => response.json()
     ).then(
         (data) => {
