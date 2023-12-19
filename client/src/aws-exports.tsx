@@ -1,5 +1,9 @@
-export default {
-    "REGION": "eu-west-1",
-    "USER_POOL_ID": "eu-west-1_nVgSgHDdY",
-    "USER_POOL_APP_CLIENT_ID": "7fif8ulaaq3et4b8e2simntvdq"
+const awsExports = {
+    "aws_project_region": "eu-west-1",
+    "aws_cognito_region": "ew-west-1",
+    "aws_user_pools_id": "eu-west-1_p66NRmm9C",
+    "aws_user_pools_web_client_id": "31r6or6l37hhdsvcjnqvn0253",
+    "oauth": {}
 }
+
+export default awsExports

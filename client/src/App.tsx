@@ -13,16 +13,7 @@ import awsExports from './aws-exports';
 import { withAuthenticator } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 
-Amplify.configure({
-    Auth: {
-        region: awsExports.REGION,
-        userPoolId: awsExports.USER_POOL_ID,
-        userPoolWebClientId: awsExports.USER_POOL_APP_CLIENT_ID
-    }
-})
-
-const currentConfig = Amplify.getConfig();
-console.log(currentConfig)
+Amplify.configure(awsExports);
 
 function App() {
     const [previousChats, setPreviousChats] = useState([])
