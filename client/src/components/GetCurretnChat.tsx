@@ -31,8 +31,8 @@ function getCurrentChat({setCurrentChat, userInput, currentChat, setUserInput}: 
 
         })
     }
-    console.log(process.env.REACT_APP_ENDPOINT)
-    fetch(`${process.env.REACT_APP_ENDPOINT}get-answer/`, options).then(
+    console.log(import.meta.env.REACT_APP_ENDPOINT)
+    fetch(`${import.meta.env.REACT_APP_ENDPOINT}get-answer/`, options).then(
         (response) => response.json()
     ).then(
         (data) => {
