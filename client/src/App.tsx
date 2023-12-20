@@ -3,11 +3,13 @@ import React, {useEffect, useState} from "react";
 import './App.css'
 import NewChatButton from "./components/NewChatButton";
 import ChatHistory from "./components/ChatHistory";
+import SaveChatHistoryButton from "./components/SaveChatHistoryButton"
 import UserInputContainer from "./components/UserInputContainer";
 import Footer from "./components/Footer";
 import Logo from "./components/Logo";
 import LiveChatFeed from "./components/LiveChatFeed";
-import getCurrentChat from "./components/GetCurretnChat";
+import getCurrentChat from "./components/GetCurrentChat";
+import getUserChatHistory from "./components/GetUserChatHistory"
 import { Amplify } from 'aws-amplify';
 import awsExports from './aws-exports';
 import { withAuthenticator } from '@aws-amplify/ui-react';
@@ -27,6 +29,12 @@ function App() {
             "isBot": true
         }
     ])
+
+    const userId = "gjmgjmg"
+
+    useEffect(() => {
+        getUserChatHistory({userId, previousChats, setPreviousChats});
+    }, []);
 
     const onClickEventHandler = () => {
         getCurrentChat(
@@ -48,6 +56,10 @@ function App() {
                     previousChats={previousChats}
                     setCurrentChat={setCurrentChat}
                 ></ChatHistory>
+                <SaveChatHistoryButton
+                    userId={userId}
+                    previousChats={previousChats}
+                ></SaveChatHistoryButton>
             </section>
             <section id="main">
                 <LiveChatFeed currentChat={currentChat}></LiveChatFeed>

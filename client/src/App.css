@@ -119,8 +119,6 @@ button:active {
     width: 15px;
     margin: 1.3rem;
     float: left;
-    box-shadow: 0 4px 8px 0 #DD0525,
-    0 6px 20px 0 #DD0525;
 }
 
 #chat-history {
@@ -135,6 +133,30 @@ button:active {
     list-style-type: none;
     padding: 15px 0;
     cursor: pointer;
+}
+
+.save-chat-history-button {
+    display: flex;
+    align-items: center;
+    background: transparent;
+    padding: 8px;
+    width: 25rem;
+    margin: 3rem;
+    border-radius: 0.5rem;
+    border: 2px solid rgb(100, 100, 100);
+    font-size: 15px;
+    cursor: pointer;
+    float: left;
+    left: 20px;
+    box-shadow: 0 4px 8px 0 #DD0525,
+                 0 6px 28px 0 #DD0525;
+}
+
+.save-icon-img {
+    height: 17px;
+    width: 17px;
+    margin: 1rem;
+    float: left;
 }
 
 #main {
