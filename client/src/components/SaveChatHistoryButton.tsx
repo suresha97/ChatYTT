@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {chatItem} from "./LiveChatFeed";
 import saveIcon from "../assets/saveicon.png"
+import tickIcon from "../assets/tickIcon.png"
 
 
 interface Props {
@@ -38,8 +39,8 @@ function SaveChatHistoryButton({userId, previousChats}: Props){
         <button
             className="save-chat-history-button"
             onClick={() => {saveChatHistory()}}
-        > <img className="save-icon-img" src={saveIcon}/>
-        {isChatSaved?"Chat Saved":"Save Chat History"}
+        > <img className={isChatSaved?"tick-icon-img":"save-icon-img"} src={isChatSaved?tickIcon:saveIcon}/>
+        {isChatSaved?"Chats Saved":"Save Chat History"}
         </button>
     )
 }

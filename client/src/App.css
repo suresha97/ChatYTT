@@ -159,6 +159,13 @@ button:active {
     float: left;
 }
 
+.tick-icon-img {
+    height: 17px;
+    width: 17px;
+    margin: 1rem;
+    float: left;
+}
+
 #main {
     height: 100vh;
     width: 100%;
