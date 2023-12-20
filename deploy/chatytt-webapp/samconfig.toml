@@ -1,0 +1,10 @@
+version = 0.1
+[default.deploy.parameters]
+stack_name = "chatytt-webapp"
+resolve_s3 = true
+s3_prefix = "chatytt-webapp"
+region = "eu-west-1"
+confirm_changeset = true
+capabilities = "CAPABILITY_IAM"
+parameter_overrides = "GithubRepository=\"https://github.com/suresha97/ChatYTT\" GithubToken=\"{{resolve:secretsmanager:github-token:SecretString:github-token}}\" CognitoUserPoolName=\"chatytt-api-userpool\" CognitoWebClientName=\"chatytt-api-webclient\" ApiStackName=\"chatytt-api\""
+image_repositories = []

@@ -1,0 +1,75 @@
+{
+  "StartAt": "Get Latest Video IDs",
+  "States": {
+    "Get Latest Video IDs": {
+      "Type": "Task",
+      "Resource": "${FetchLatestVideoIDsFunctionArn}",
+      "ResultPath": null,
+      "Parameters": {
+        "Payload.$": "$",
+        "FunctionName": "arn:aws:lambda:eu-west-1:853084042591:function:chatytt-FetchLatestVideoIDsFunction-YbOwAk0rcHED:$LATEST"
+      },
+      "Retry": [
+        {
+          "ErrorEquals": [
+            "Lambda.ServiceException",
+            "Lambda.AWSLambdaException",
+            "Lambda.SdkClientException",
+            "Lambda.TooManyRequestsException"
+          ],
+          "IntervalSeconds": 1,
+          "MaxAttempts": 1,
+          "BackoffRate": 2
+        }
+      ],
+      "Next": "Get Transcripts"
+    },
+    "Get Transcripts": {
+      "Type": "Task",
+      "Resource": "${FetchLatestVideoTranscriptsArn}",
+      "ResultPath": null,
+      "Parameters": {
+        "Payload.$": "$",
+        "FunctionName": "arn:aws:lambda:eu-west-1:853084042591:function:chatytt-FetchLatestVideoTranscripts-pQMWri9yIXVT:$LATEST"
+      },
+      "Retry": [
+        {
+          "ErrorEquals": [
+            "Lambda.ServiceException",
+            "Lambda.AWSLambdaException",
+            "Lambda.SdkClientException",
+            "Lambda.TooManyRequestsException"
+          ],
+          "IntervalSeconds": 1,
+          "MaxAttempts": 1,
+          "BackoffRate": 2
+        }
+      ],
+      "Next": "Get Embeddings"
+    },
+    "Get Embeddings": {
+      "Type": "Task",
+      "Resource": "${FetchLatestTranscriptEmbeddingsArn}",
+      "ResultPath": null,
+      "Parameters": {
+        "Payload.$": "$",
+        "FunctionName": "arn:aws:lambda:eu-west-1:853084042591:function:chatytt-FetchLatestTranscriptEmbeddings-8jsfHWSOmVGq:$LATEST"
+      },
+      "Retry": [
+        {
+          "ErrorEquals": [
+            "Lambda.ServiceException",
+            "Lambda.AWSLambdaException",
+            "Lambda.SdkClientException",
+            "Lambda.TooManyRequestsException"
+          ],
+          "IntervalSeconds": 1,
+          "MaxAttempts": 1,
+          "BackoffRate": 2
+        }
+      ],
+      "End": true
+    }
+  },
+  "Comment": "Retrieves the latest video ids from specified playlist, gets the transcripts for these and saves the embeddings of the transcripts in Pincone DB."
+}

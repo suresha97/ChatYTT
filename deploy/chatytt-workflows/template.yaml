@@ -1,0 +1,91 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: AWS CloudFormation stack for ChatYTT chatytt-workflows
+
+Globals:
+  Function:
+    Runtime: python3.9
+    Timeout: 120
+    CodeUri: ../code_uri/.
+    Architectures:
+      - x86_64
+
+Parameters:
+  PlaylistName:
+    Type: String
+    Default: everything-you-need-to-know-about-money
+  YoutubeDataAPIKey:
+    Type: String
+    Default: '{{resolve:secretsmanager:youtube-data-api-key:SecretString:youtube-data-api-key}}'
+  PineconeAPIKey:
+    Type: String
+    Default: '{{resolve:secretsmanager:pinecone-api-key:SecretString:pinecone-api-key}}'
+  OpenaiAPIKey:
+    Type: String
+    Default: '{{resolve:secretsmanager:openai-api-key:SecretString:openai-api-key}}'
+
+Resources:
+  EmbeddingRetrieverStateMachine:
+    Type: AWS::Serverless::StateMachine
+    Properties:
+      DefinitionUri: statemachine/embedding_retriever.asl.json
+      DefinitionSubstitutions:
+        FetchLatestVideoIDsFunctionArn: !GetAtt FetchLatestVideoIDsFunction.Arn
+        FetchLatestVideoTranscriptsArn: !GetAtt FetchLatestVideoTranscripts.Arn
+        FetchLatestTranscriptEmbeddingsArn: !GetAtt FetchLatestTranscriptEmbeddings.Arn
+#      Events:
+#        HourlyTradingSchedule:
+#          Type: Schedule # More info about Schedule Event Source: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-property-statemachine-schedule.html
+#          Properties:
+#            Description: Schedule to run the stock trading state machine every hour
+#            Enabled: false # This schedule is disabled by default to avoid incurring charges.
+#            Schedule: rate(1 hour)
+      Policies:
+      - LambdaInvokePolicy:
+          FunctionName: !Ref FetchLatestVideoIDsFunction
+      - LambdaInvokePolicy:
+          FunctionName: !Ref FetchLatestVideoTranscripts
+      - LambdaInvokePolicy:
+          FunctionName: !Ref FetchLatestTranscriptEmbeddings
+
+  FetchLatestVideoIDsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: chatytt.youtube_data.lambda_handlers.fetch_latest_video_ids.lambda_handler
+      Policies:
+        - AmazonS3FullAccess
+      Environment:
+        Variables:
+          PLAYLIST_NAME:
+            Ref: PlaylistName
+          YOUTUBE_DATA_API_KEY:
+            Ref: YoutubeDataAPIKey
+
+  FetchLatestVideoTranscripts:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: chatytt.youtube_data.lambda_handlers.fetch_latest_video_transcripts.lambda_handler
+      Policies:
+        - AmazonS3FullAccess
+      Environment:
+        Variables:
+          PLAYLIST_NAME:
+            Ref: PlaylistName
+          YOUTUBE_DATA_API_KEY:
+            Ref: YoutubeDataAPIKey
+
+  FetchLatestTranscriptEmbeddings:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: chatytt.embeddings.lambda_handlers.fetch_latest_transcript_embeddings.lambda_handler
+      MemorySize: 512
+      Policies:
+        - AmazonS3FullAccess
+      Environment:
+        Variables:
+          PLAYLIST_NAME:
+            Ref: PlaylistName
+          PINECONE_API_KEY:
+            Ref: PineconeAPIKey
+          OPENAI_API_KEY:
+            Ref: OpenaiAPIKey

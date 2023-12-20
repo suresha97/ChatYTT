@@ -163,7 +163,7 @@ cython_debug/
 .idea
 
 # AWS
-deploy/lambda_code_uri/
+deploy/code_uri/
 .aws-sam
 
 .DS_Store

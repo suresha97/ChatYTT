@@ -1,0 +1,10 @@
+version = 0.1
+[default.deploy.parameters]
+stack_name = "chatytt-workflows"
+resolve_s3 = true
+s3_prefix = "chatytt-workflows"
+region = "eu-west-1"
+confirm_changeset = true
+capabilities = "CAPABILITY_IAM"
+parameter_overrides = "PlaylistName=\"everything-you-need-to-know-about-money\""
+image_repositories = []
