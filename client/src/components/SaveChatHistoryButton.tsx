@@ -25,7 +25,7 @@ function SaveChatHistoryButton({userId, previousChats}: Props){
         }
 
 
-        fetch(`${import.meta.env.VITE_ENDPOINT}/save-chat-history/`, options).then(
+        fetch(`${import.meta.env.VITE_ENDPOINT}save-chat-history/`, options).then(
             (response) => response.json()
         ).then(
             (data) => {
