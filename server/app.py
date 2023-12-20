@@ -57,8 +57,8 @@ def get_chat_history():
     return jsonify({"response": response})
 
 
-@app.route("/update-chat-history/", methods=["PUT"])
-def create_or_update_chat_history():
+@app.route("/save-chat-history/", methods=["PUT"])
+def save_chat_history():
     app.logger.debug(f"request: {request.get_json()}")
     data = request.get_json()
     user_id = data["userId"]
