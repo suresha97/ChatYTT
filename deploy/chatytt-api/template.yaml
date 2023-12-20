@@ -1,0 +1,67 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: AWS CloudFormation stack for ChatYTT api
+
+Parameters:
+  PineconeAPIKey:
+    Type: String
+    Default: '{{resolve:secretsmanager:pinecone-api-key:SecretString:pinecone-api-key}}'
+  OpenaiAPIKey:
+    Type: String
+    Default: '{{resolve:secretsmanager:openai-api-key:SecretString:openai-api-key}}'
+
+Resources:
+  ChatYTTApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: Prod
+      Cors:
+        AllowMethods: "'*'"
+        AllowHeaders: "'*'"
+        AllowOrigin: "'*'"
+
+  ChatResponseFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Runtime: python3.9
+      Timeout: 120
+      CodeUri: ../code_uri/.
+      Handler: server.lambda_handler.lambda_handler
+      Policies:
+        - AmazonDynamoDBFullAccess
+      MemorySize: 512
+      Architectures:
+        - x86_64
+      Environment:
+        Variables:
+          PINECONE_API_KEY:
+            Ref: PineconeAPIKey
+          OPENAI_API_KEY:
+            Ref: OpenaiAPIKey
+      Events:
+        GetAnswer:
+          Type: Api
+          Properties:
+            RestApiId: !Ref ChatYTTApi
+            Path: /get-answer/
+            Method: post
+        GetChatHistory:
+          Type: Api
+          Properties:
+            RestApiId: !Ref ChatYTTApi
+            Path: /get-chat-history/
+            Method: get
+        UpdateChatHistory:
+          Type: Api
+          Properties:
+            RestApiId: !Ref ChatYTTApi
+            Path: /save-chat-history/
+            Method: put
+
+Outputs:
+  OrderApi:
+    Description: "API Gateway endpoint URL for Prod stage."
+    Value: !Sub "https://${ChatYTTApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
+    Export:
+      Name:
+        Fn::Sub: "${AWS::StackName}-ChatYTTAPIURL"
