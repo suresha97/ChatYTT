@@ -11,20 +11,20 @@ from chatytt.conf.config import load_config
 
 def get_latest_transcript_file_keys():
     transcript_keys = list_keys_at_prefix_dir_level(
-        bucket=str(os.environ.get("YOUTUBE_DATA_BUCKET")),
-        filter_prefix_dir=f"{os.environ.get('VIDEO_TRANSCRIPTS_KEY_PREFIX')}/"
+        bucket="chatyt-youtube-data",
+        filter_prefix_dir=f"video-transcripts/"
         f"{os.environ.get('PLAYLIST_NAME')}-transcripts/",
     )
     max_timestamp_key = max([int(timestamp_key) for timestamp_key in transcript_keys])
 
     file_filter_prefix = (
-        f"{os.environ.get('VIDEO_TRANSCRIPTS_KEY_PREFIX')}/"
+        "video-transcripts/"
         + f"{os.environ.get('PLAYLIST_NAME')}-transcripts/"
         + f"{max_timestamp_key}/"
     )
 
     latest_transcript_files = list_keys_at_prefix_dir_level(
-        bucket=str(os.environ.get("YOUTUBE_DATA_BUCKET")),
+        bucket="chatyt-youtube-data",
         filter_prefix_dir=file_filter_prefix,
     )
 
@@ -40,7 +40,7 @@ def lambda_handler(event, context):
     docs = []
     for file_key in latest_transcript_file_keys:
         loader = S3JsonFileLoader(
-            bucket=os.environ.get("YOUTUBE_DATA_BUCKET"),
+            bucket="chatyt-youtube-data",
             key=file_key,
             text_splitter=pre_processing.get_recursive_character_splitter(),
         )

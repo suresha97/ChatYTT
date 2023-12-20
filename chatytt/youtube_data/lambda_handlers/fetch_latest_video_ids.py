@@ -11,6 +11,7 @@ from chatytt.conf.config import load_config
 
 def lambda_handler(event, context):
     load_dotenv()
+    print(os.environ.get("YOUTUBE_DATA_API_KEY"))
 
     video_conf = load_config()["youtube_data"]["video"]
 
@@ -20,11 +21,11 @@ def lambda_handler(event, context):
         lookback_datetime=datetime.now()
         - timedelta(days=video_conf["latest_video_lookback_delta_days"]),
     )
-    print(os.environ.get("YOUTUBE_DATA_API_KEY"))
+
     save_json_to_s3(
         video_ids,
-        bucket=str(os.environ.get("YOUTUBE_DATA_BUCKET")),
-        key=f"{os.environ.get('VIDEO_IDS_KEY_PREFIX')}/"
+        bucket="chatyt-youtube-data",
+        key=f"video-ids/"
         f"{os.environ.get('PLAYLIST_NAME')}-video-ids/"
         f"{int(time.time())}/"
         f"video_ids.json",

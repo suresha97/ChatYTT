@@ -15,9 +15,8 @@ from chatytt.conf.config import load_config
 
 def get_most_recent_video_id_collection_timestamp():
     video_id_keys = list_keys_at_prefix_dir_level(
-        bucket=str(os.environ.get("YOUTUBE_DATA_BUCKET")),
-        filter_prefix_dir=f"{os.environ.get('VIDEO_IDS_KEY_PREFIX')}/"
-        f"{os.environ.get('PLAYLIST_NAME')}-video-ids/",
+        bucket="chatyt-youtube-data",
+        filter_prefix_dir=f"video-ids/" f"{os.environ.get('PLAYLIST_NAME')}-video-ids/",
     )
     max_timestamp_key = max([int(timestamp_key) for timestamp_key in video_id_keys])
 
@@ -30,8 +29,8 @@ def store_latest_transcripts(
     for transcript in transcripts:
         save_json_to_s3(
             json_obj=dict(transcript),
-            bucket=str(os.environ.get("YOUTUBE_DATA_BUCKET")),
-            key=f"{os.environ.get('VIDEO_TRANSCRIPTS_KEY_PREFIX')}/"
+            bucket="chatyt-youtube-data",
+            key=f"video-transcripts/"
             f"{os.environ.get('PLAYLIST_NAME')}-transcripts/"
             f"{video_id_retrieval_timestamp}/"
             f"{transcript.video_id}.json",
@@ -45,8 +44,8 @@ def lambda_handler(event, context):
 
     max_timestamp_key = get_most_recent_video_id_collection_timestamp()
     latest_video_ids = load_json_from_s3_as_dict(
-        bucket=str(os.environ.get("YOUTUBE_DATA_BUCKET")),
-        key=f"{os.environ.get('VIDEO_IDS_KEY_PREFIX')}/"
+        bucket="chatyt-youtube-data",
+        key=f"video-ids/"
         f"{os.environ.get('PLAYLIST_NAME')}-video-ids/"
         f"{max_timestamp_key}"
         f"/video_ids.json",
