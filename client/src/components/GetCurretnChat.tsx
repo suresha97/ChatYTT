@@ -31,7 +31,7 @@ function getCurrentChat({setCurrentChat, userInput, currentChat, setUserInput}: 
 
         })
     }
-    console.log(import.meta.env.VITE_ENDPOINT)
+
     fetch(`${import.meta.env.VITE_ENDPOINT}get-answer/`, options).then(
         (response) => response.json()
     ).then(
