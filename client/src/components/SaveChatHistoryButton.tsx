@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {chatItem} from "./LiveChatFeed";
 import saveIcon from "../assets/saveicon.png"
-import tickIcon from "../assets/tickIcon.png"
+import tickIcon from "../assets/tickicon.png"
 
 
 interface Props {
