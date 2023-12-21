@@ -11,7 +11,7 @@ prompts to and retrieving responses from LLMs.
 user chat history.
 - **client**: A React.js application providing a chat like user interface for asking questions, creating new chats to
 separate lines of questioning and saving chats for future reference.
-- deploy: The Cloudformation templates containing IaC used to deploy each component (with the AWS SAM CLI).
+- **deploy**: The Cloudformation templates containing IaC used to deploy each component (with the AWS SAM CLI).
 
 The architecture diagram below describe the end-end interactions of these components, as deployed on AWS:
 
