@@ -15,7 +15,7 @@ function getUserChatHistory({userId, previousChats, setPreviousChats}: Props){
                 'Accept': 'application/json'
             }
         }
-
+        console.log(userId)
         fetch(`${import.meta.env.VITE_ENDPOINT}get-chat-history/?userId=${userId}`, options).then(
             (response) => response.json()
         ).then(
