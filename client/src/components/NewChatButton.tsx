@@ -20,10 +20,10 @@ function NewChatButton({setCurrentChat, previousChats, setPreviousChats, current
         )
         setCurrentChat([
             {
-                "text": "Howdy, I'm a chatbot which leverages the gpt-3.5-turbo model. But " +
+                "text": "Hello, I'm a chatbot which leverages the gpt-3.5-turbo model. But " +
                     "the context for my responses comes from a semantic search performed against a vector database " +
                     "of youtube video transcripts using your questions. Currently I can only answer questions on the videos from " +
-                    "this here playlist: ",
+                    "a playlist of podcasts on personal finance and investing from the The Diary of a CEO channel.",
                 "isBot": true
             }
         ])
