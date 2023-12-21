@@ -30,7 +30,7 @@ function App() {
         }
     ])
 
-    const userId = "gjmgjmg"
+    const userId = "suresha97"
 
     useEffect(() => {
         getUserChatHistory({userId, previousChats, setPreviousChats});
