@@ -9,10 +9,10 @@ interface Props {
 
 function ChatHistory({previousChats, setCurrentChat}: Props) {
     const getDisplayString = (text: string) => {
-        if (text.length < 30) {
+        if (text.length < 27) {
             return text
         } else {
-            return text.slice(0, 27).concat("...")
+            return text.slice(0, 24).concat("...")
         }
     }
 
