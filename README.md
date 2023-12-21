@@ -19,4 +19,7 @@ The architecture diagram below describe the end-end interactions of these compon
 
 Below is a demo of the web application:
 
-https://github.com/suresha97/ChatYTT/blob/main/docs/Screen-2023-12-21-180035.mp4
+https://github.com/suresha97/ChatYTT/assets/59473857/cb2ef369-6add-4501-a872-fcb9d0a65a58
+
+
+
