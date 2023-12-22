@@ -28,7 +28,11 @@ def get_latest_transcript_file_keys():
         filter_prefix_dir=file_filter_prefix,
     )
 
-    return [file_filter_prefix + file for file in latest_transcript_files]
+    return [
+        file_filter_prefix + file
+        for file in latest_transcript_files
+        if file != "null_transcript.json"
+    ]
 
 
 def lambda_handler(event, context):
@@ -47,12 +51,12 @@ def lambda_handler(event, context):
 
         docs.extend(loader.load(split_doc=True))
 
-    docs = docs[0:2]
-    vector_store = PineconeDB(
-        index_name=pinecone_conf["index_name"],
-        embedding_source=pinecone_conf["embedding_source"],
-    )
-    vector_store.save_documents_as_embeddings(docs)
+    if len(docs):
+        vector_store = PineconeDB(
+            index_name=pinecone_conf["index_name"],
+            embedding_source=pinecone_conf["embedding_source"],
+        )
+        vector_store.save_documents_as_embeddings(docs)
 
 
 if __name__ == "__main__":

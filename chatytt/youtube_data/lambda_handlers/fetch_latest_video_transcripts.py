@@ -26,14 +26,24 @@ def get_most_recent_video_id_collection_timestamp():
 def store_latest_transcripts(
     transcripts: List[FormattedVideoTranscript], video_id_retrieval_timestamp: int
 ):
-    for transcript in transcripts:
+    if len(transcripts):
+        for transcript in transcripts:
+            save_json_to_s3(
+                json_obj=dict(transcript),
+                bucket="chatyt-youtube-data",
+                key=f"video-transcripts/"
+                f"{os.environ.get('PLAYLIST_NAME')}-transcripts/"
+                f"{video_id_retrieval_timestamp}/"
+                f"{transcript.video_id}.json",
+            )
+    else:
         save_json_to_s3(
-            json_obj=dict(transcript),
+            json_obj={},
             bucket="chatyt-youtube-data",
             key=f"video-transcripts/"
             f"{os.environ.get('PLAYLIST_NAME')}-transcripts/"
             f"{video_id_retrieval_timestamp}/"
-            f"{transcript.video_id}.json",
+            "null_transcript.json",
         )
 
 
