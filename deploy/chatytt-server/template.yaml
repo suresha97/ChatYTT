@@ -39,11 +39,11 @@ Resources:
           OPENAI_API_KEY:
             Ref: OpenaiAPIKey
       Events:
-        GetAnswer:
+        GetQueryResponse:
           Type: Api
           Properties:
             RestApiId: !Ref ChatYTTApi
-            Path: /get-answer/
+            Path: /get-query-response/
             Method: post
         GetChatHistory:
           Type: Api

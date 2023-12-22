@@ -6,13 +6,13 @@ Resources:
   AmplifyApp:
     Type: AWS::Amplify::App
     Properties:
-      Name: amplify-chatytt-webapp
+      Name: amplify-chatytt-client
       Repository: https://github.com/suresha97/ChatYTT
       AccessToken: '{{resolve:secretsmanager:github-token:SecretString:github-token}}'
       IAMServiceRole: !GetAtt AmplifyRole.Arn
       EnvironmentVariables:
         - Name: ENDPOINT
-          Value: !ImportValue 'chatytt-api-ChatYTTAPIURL'
+          Value: !ImportValue 'chatytt-server-ChatYTTAPIURL'
 
   AmplifyBranch:
     Type: AWS::Amplify::Branch
@@ -45,7 +45,7 @@ Resources:
   CognitoUserPool:
     Type: AWS::Cognito::UserPool
     Properties:
-      UserPoolName: chatytt-api-userpool
+      UserPoolName: chatytt-server-userpool
       AliasAttributes:
         - email
       UsernameConfiguration:
@@ -63,7 +63,7 @@ Resources:
   WebCognitoUserPoolClient:
     Type: AWS::Cognito::UserPoolClient
     Properties:
-      ClientName: chatytt-api-webclient
+      ClientName: chatytt-server-webclient
       UserPoolId: !Ref CognitoUserPool
       ExplicitAuthFlows:
         - ALLOW_USER_SRP_AUTH

@@ -2,16 +2,16 @@ build-code-uri:
 	bash build_code_uri.sh
 
 deploy-workflows-stack: build-code-uri
-	cd chatytt-workflows && \
+	cd workflows && \
 	sam build && \
 	sam deploy
 
-deploy-api-stack: build-code-uri
-	cd chatytt-api && \
+deploy-server-stack: build-code-uri
+	cd chatytt-server && \
 	sam build && \
 	sam deploy
 
-deploy-webapp-stack:
-	cd chatytt-webapp && \
+deploy-client-stack:
+	cd chatytt-client && \
 	sam build && \
 	sam deploy
