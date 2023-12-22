@@ -21,8 +21,8 @@ pinecone_db = PineconeDB(index_name="youtube-transcripts", embedding_source="ope
 chain = ConversationalQAChain(vector_store=pinecone_db.vector_store)
 
 
-@app.route("/get-answer/", methods=["POST"])
-def get_answer():
+@app.route("/get-query-response/", methods=["POST"])
+def get_query_response():
     if request.method == "POST":
         data = request.get_json()
         query = data["query"]

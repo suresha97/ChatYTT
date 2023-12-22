@@ -32,7 +32,7 @@ function getCurrentChat({setCurrentChat, userInput, currentChat, setUserInput}: 
         })
     }
 
-    fetch(`${import.meta.env.VITE_ENDPOINT}get-answer/`, options).then(
+    fetch(`${import.meta.env.VITE_ENDPOINT}get-query-response/`, options).then(
         (response) => response.json()
     ).then(
         (data) => {

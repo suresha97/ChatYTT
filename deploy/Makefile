@@ -2,7 +2,7 @@ build-code-uri:
 	bash build_code_uri.sh
 
 deploy-workflows-stack: build-code-uri
-	cd workflows && \
+	cd chatytt-workflows && \
 	sam build && \
 	sam deploy
 
