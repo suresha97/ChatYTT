@@ -19,7 +19,7 @@ Resources:
     Properties:
       BranchName: main
       AppId: !GetAtt AmplifyApp.AppId
-      EnableAutoBuild: true
+      EnableAutoBuild: false
 
   AmplifyRole:
     Type: AWS::IAM::Role
