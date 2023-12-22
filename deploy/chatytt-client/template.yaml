@@ -12,14 +12,14 @@ Resources:
       IAMServiceRole: !GetAtt AmplifyRole.Arn
       EnvironmentVariables:
         - Name: ENDPOINT
-          Value: !ImportValue 'chatytt-server-ChatYTTAPIURL'
+          Value: !ImportValue 'chatytt-api-ChatYTTAPIURL'
 
   AmplifyBranch:
     Type: AWS::Amplify::Branch
     Properties:
       BranchName: main
       AppId: !GetAtt AmplifyApp.AppId
-      EnableAutoBuild: false
+      EnableAutoBuild: true
 
   AmplifyRole:
     Type: AWS::IAM::Role
@@ -45,7 +45,7 @@ Resources:
   CognitoUserPool:
     Type: AWS::Cognito::UserPool
     Properties:
-      UserPoolName: chatytt-server-userpool
+      UserPoolName: chatytt-userpool
       AliasAttributes:
         - email
       UsernameConfiguration:
@@ -63,7 +63,7 @@ Resources:
   WebCognitoUserPoolClient:
     Type: AWS::Cognito::UserPoolClient
     Properties:
-      ClientName: chatytt-server-webclient
+      ClientName: chatytt-webclient
       UserPoolId: !Ref CognitoUserPool
       ExplicitAuthFlows:
         - ALLOW_USER_SRP_AUTH
