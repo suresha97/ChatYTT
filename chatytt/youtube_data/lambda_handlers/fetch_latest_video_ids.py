@@ -11,7 +11,6 @@ from chatytt.conf.config import load_config
 
 def lambda_handler(event, context):
     load_dotenv()
-    print(os.environ.get("YOUTUBE_DATA_API_KEY"))
 
     video_conf = load_config()["youtube_data"]["video"]
 
