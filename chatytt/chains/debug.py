@@ -21,13 +21,6 @@ if __name__ == "__main__":
         index_name="youtube-transcripts", embedding_source="open-ai"
     )
 
-    query = (
-        "Is buying a house a good financial decision to make in your 20s ? Give details on the "
-        "reasoning behind your answer. Also provide the name of the speaker in the provided context from"
-        "which you have constructed your answer."
-    )
-    chat_history: List[tuple[str, str]] = []
-
     # conversational_qa_chain = ConversationalQAChain(
     #     vector_store=pinecone_db.vector_store
     # )
@@ -38,6 +31,14 @@ if __name__ == "__main__":
     conversational_qa_chain = ConversationalQASequentialChain(
         vector_store=pinecone_db.vector_store, chat_model=ChatOpenAI(temperature=0.0)
     )
+
+    query = (
+        "Is buying a house a good financial decision to make in your 20s ? Give details on the "
+        "reasoning behind your answer. Also provide the name of the speaker in the provided context from"
+        "which you have constructed your answer."
+    )
+
+    chat_history: List[tuple[str, str]] = []
     response = conversational_qa_chain.get_response(
         query=query, chat_history=chat_history
     )
@@ -45,7 +46,6 @@ if __name__ == "__main__":
 
     chat_history = [(query, response)]
     query = "What is their opinion on what the right time to one is ?"
-
     response = conversational_qa_chain.get_response(
         query=query, chat_history=chat_history
     )

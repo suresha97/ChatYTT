@@ -25,6 +25,16 @@ def generate_examples_qas(docs):
     return [example["qa_pairs"] for example in examples]
 
 
+def get_chain_predictions(chain, example_qas):
+    predictions = []
+
+    for example in example_qas:
+        response = chain.get_response(query=example["query"], chat_history=[])
+        predictions.append({"result": response})
+
+    return predictions
+
+
 def evaluate_predictions_against_examples_qas(examples, predictions, verbose=False):
     llm = ChatOpenAI(temperature=0)
     eval_chain = QAEvalChain.from_llm(llm)
@@ -42,16 +52,6 @@ def evaluate_predictions_against_examples_qas(examples, predictions, verbose=Fal
     total_correct = sum(grade["results"] == "CORRECT" for grade in graded_outputs)
 
     return total_correct
-
-
-def get_chain_predictions(chain, example_qas):
-    predictions = []
-
-    for example in example_qas:
-        response = chain.get_response(query=example["query"], chat_history=[])
-        predictions.append({"result": response})
-
-    return predictions
 
 
 if __name__ == "__main__":
