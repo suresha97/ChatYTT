@@ -2,7 +2,7 @@ from dotenv import load_dotenv
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
-from chatytt.chains import ConversationalQAChain
+from chatytt.chains.standard import ConversationalQAChain
 from chatytt.vector_store.pinecone_db import PineconeDB
 from server.utils.chat import parse_chat_history
 from server.utils.dynamodb import (
@@ -34,7 +34,7 @@ def get_query_response():
     app.logger.debug(f"Raw chat history: {raw_chat_history}")
     app.logger.debug(f"Parsed chat history: {chat_history}")
 
-    response = chain.get_response(query=query, context=chat_history)
+    response = chain.get_response(query=query, chat_history=chat_history)
 
     return jsonify({"response": response})
 
