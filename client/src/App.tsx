@@ -30,6 +30,7 @@ function App() {
         }
     ])
 
+    // Hardcode user name due to issues parsing user name (#2)
     const userId = "suresha97"
 
     useEffect(() => {
