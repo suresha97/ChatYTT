@@ -3,7 +3,7 @@ import {chatItem} from "./LiveChatFeed";
 import signOutImg from "../assets/icons8-sign-out-50.png"
 
 interface Props {
-    signOut: Any
+    signOut: any
 }
 
 

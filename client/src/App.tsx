@@ -13,12 +13,13 @@ import getCurrentChat from "./components/GetCurrentChat";
 import getUserChatHistory from "./components/GetUserChatHistory"
 import { Amplify } from 'aws-amplify';
 import awsExports from './aws-exports';
-import { withAuthenticator } from '@aws-amplify/ui-react';
+import { withAuthenticator, useAuthenticator} from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 
 Amplify.configure(awsExports);
 
-function App({signOut, user}) {
+function App() {
+    const { user, signOut } = useAuthenticator((context) => [context.user]);
     const [previousChats, setPreviousChats] = useState([])
     const [userInput, setUserInput] = useState("")
     const [currentChat, setCurrentChat] = useState([
