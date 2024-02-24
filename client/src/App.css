@@ -79,7 +79,7 @@ button:active {
     display: flex;
     align-items: center;
     background: transparent;
-    padding: 8px;
+    padding: 3.5px;
     width: 25rem;
     margin: 3rem;
     border-radius: 0.5rem;
@@ -122,8 +122,8 @@ button:active {
 }
 
 #chat-history {
-    padding: 1px;
-    margin: 5px;
+    padding: 0.1px;
+    margin: 0.1px;
     height: 100%;
     overflow-y: scroll;
     scroll-behavior: smooth;
@@ -139,7 +139,25 @@ button:active {
     display: flex;
     align-items: center;
     background: transparent;
-    padding: 8px;
+    padding: 3px;
+    width: 25rem;
+    margin-left: 3rem;
+    margin-top: 1rem;
+    border-radius: 0.5rem;
+    border: 2px solid rgb(100, 100, 100);
+    font-size: 15px;
+    cursor: pointer;
+    float: left;
+    left: 20px;
+    box-shadow: 0 4px 8px 0 #DD0525,
+                 0 6px 28px 0 #DD0525;
+}
+
+.sign-out-button {
+    display: flex;
+    align-items: center;
+    background: transparent;
+    padding: 3.5px;
     width: 25rem;
     margin: 3rem;
     border-radius: 0.5rem;
@@ -153,6 +171,13 @@ button:active {
 }
 
 .save-icon-img {
+    height: 17px;
+    width: 17px;
+    margin: 1rem;
+    float: left;
+}
+
+.sign-out-img {
     height: 17px;
     width: 17px;
     margin: 1rem;

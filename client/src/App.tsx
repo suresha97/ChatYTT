@@ -5,6 +5,7 @@ import NewChatButton from "./components/NewChatButton";
 import ChatHistory from "./components/ChatHistory";
 import SaveChatHistoryButton from "./components/SaveChatHistoryButton"
 import UserInputContainer from "./components/UserInputContainer";
+import SignOutButton from "./components/SignOutButton";
 import Footer from "./components/Footer";
 import Logo from "./components/Logo";
 import LiveChatFeed from "./components/LiveChatFeed";
@@ -17,7 +18,7 @@ import '@aws-amplify/ui-react/styles.css';
 
 Amplify.configure(awsExports);
 
-function App() {
+function App({signOut, user}) {
     const [previousChats, setPreviousChats] = useState([])
     const [userInput, setUserInput] = useState("")
     const [currentChat, setCurrentChat] = useState([
@@ -30,9 +31,7 @@ function App() {
         }
     ])
 
-    // Hardcode user name due to parsing issue (#2)
-    const userId = "suresha97"
-
+    const userId = user.username
     useEffect(() => {
         getUserChatHistory({userId, previousChats, setPreviousChats});
     }, []);
@@ -61,6 +60,9 @@ function App() {
                     userId={userId}
                     previousChats={previousChats}
                 ></SaveChatHistoryButton>
+                <SignOutButton
+                    signOut={signOut}
+                ></SignOutButton>
             </section>
             <section id="main">
                 <LiveChatFeed currentChat={currentChat}></LiveChatFeed>
